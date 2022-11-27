@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Analista analista = new Analista("C:\\Users\\Joao\\Desktop\\Trabalho Pratico\\hehe.txt");
+        Analista analista = new Analista("hehe.txt");
         analista.quantasOcorrencias('e');
 
         }
