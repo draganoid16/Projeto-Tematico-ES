@@ -20,6 +20,17 @@ class AnalistaTest {
         var analista = new Analista("testevazio.txt");
         assertNull(analista.lerFicheiro("testevazio.txt"));
     }
+
+    /*@Test
+    void assertFileNotFoundException(){
+        var analista = new Analista("ficheiroinexistentesdadsadsadsadsa.txt");
+        assertThrows(FileNotFoundException.class,
+                () -> {
+                analista.lerFicheiro("ficheiroinexistentedsadsasdasda.txt");
+                });
+    } teste não funciona porque já é apanhado no codigo, resolvido no codigo ao fazer este retornar nulo com os testes em cima
+    */
+
     //testes para quantasOcurrencias
     @Test
     void assertArrayTemValorEsperado(){

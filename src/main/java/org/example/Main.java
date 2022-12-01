@@ -11,6 +11,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Analista analista = new Analista("hehe.txt");
         analista.quantasOcorrencias('e');
-
+        analista.listaPalavras('e', "testelistapalavras");
         }
     }
