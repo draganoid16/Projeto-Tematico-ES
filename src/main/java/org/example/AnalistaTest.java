@@ -4,6 +4,9 @@ import org.example.Analista;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,6 +58,38 @@ class AnalistaTest {
         var analista = new Analista("testearraysemletra.txt");
         assertArrayEquals(testeArray, analista.quantasOcorrencias(c));
     }
+
+    //testes para ListaPalavras
+    @Test
+    void assertWordsStartingWithE() throws IOException {
+        Map<String, Integer> words = new HashMap<>();
+        words.put("existe", 2);
+        var analista = new Analista("hehe.txt");
+
+        assertEquals(words, analista.listaPalavras('e', "testelistapalavras.out") );
+
+    }
+
+    /*
+        Test that the method returns a map containing all words that start with the specified character.
+        Input: c = 'a', ficheiro = "input.txt"
+        Output: words = { "apple": 2, "ant": 1 }
+    Test that the method does not return words that do not start with the specified character.
+        Input: c = 'b', ficheiro = "input.txt"
+        Output: words = { "banana": 1, "blueberry": 2 }
+    Test that the method correctly handles special characters in words.
+        Input: c = '$', ficheiro = "input.txt"
+        Output: words = { "$100": 1, "$$$": 2 }
+    Test that the method correctly handles words with uppercase letters.
+        Input: c = 'C', ficheiro = "input.txt"
+        Output: words = { "Cats": 1, "Carrots": 2 }
+    Test that the method correctly handles words with numbers.
+        Input: c = '1', ficheiro = "input.txt"
+        Output: words = { "123": 1, "1st": 2 }
+    Test that the method correctly handles empty files.
+        Input: c = 'x', ficheiro = "empty.txt"
+        Output: words = { }
+     */
 
 
 }

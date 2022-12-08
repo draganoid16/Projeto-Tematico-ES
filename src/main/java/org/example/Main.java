@@ -12,5 +12,6 @@ public class Main {
         Analista analista = new Analista("hehe.txt");
         analista.quantasOcorrencias('e');
         analista.listaPalavras('e', "testelistapalavras");
+        analista.listaPalavras('c', "testelistapalavras2");
         }
     }

@@ -1,9 +1,7 @@
 package org.example;
 
 import java.io.*;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.*;
 
 
 public class Analista {
@@ -77,65 +75,34 @@ public class Analista {
         return palavrascomLetra;
     }
 
-    public int listaPalavras(char c, String ficheiro) {
-        try {
-            String[] words = conteudoficheiro.split("\\s+");
-            String palavraaguardar = "";
-            int occurencias = 0;
+    public Map listaPalavras (char c, String ficheiro) throws IOException {
+        //cria um novo ficheiro
+        File myObj = new File(ficheiro + ".out");
 
-            File meuFicheiro = new File(ficheiro + ".out");
+        // Create a map to store the words and their counts
+        Map<String, Integer> words = new HashMap<>();
+        String[] lineWords = conteudoficheiro.split("\\s+");
 
-            if (meuFicheiro.createNewFile()) {
-                System.out.println("Ficheiro " + meuFicheiro.getName() + " gravado com sucesso.");
-            } else {
-                System.out.println("Ficheiro já existe.");
-                return 0;
+        // Loop over the words and add them to the map if they start with the specified character
+        for (String word : lineWords) {
+            if (word.startsWith(String.valueOf(c))) {
+                words.put(word, words.getOrDefault(word, 0) + 1);
             }
-
-            FileWriter myWriter = new FileWriter(ficheiro + ".out");
-
-            for (int i = 0; i < words.length; i++) {
-
-                if (words[i].startsWith(String.valueOf(c))) { //verifica se a palavra começa com o char especificado (teve que ser convertido para string)
-                    palavraaguardar = words[i];
-                    for (int x = 0; x < words.length; x++) {
-                        if (Objects.equals(words[x], palavraaguardar)) {
-                            occurencias++;
-                        }
-
-                    }
-
-
-                    myWriter.write(palavraaguardar + " " + occurencias + "\n");
-                    occurencias = 0;
-
-
-                }
-
-                /*
-                String ficheirotemp = lerFicheiro(ficheiro + ".out");
-                String[] palavrasguardadas = ficheirotemp.split("\\s+");
-                String temppalavra = "";
-
-                for (int f = 0; f < palavrasguardadas.length; f++) {
-                    palavrasguardadas[f] = temppalavra;
-                    if (temppalavra == palavraaguardar) {
-                        occurencias = 0;
-                        palavraaguardar = "";
-                    }
-                }
-*/
-            }
-
-            myWriter.close();
-        } catch (IOException e) {
-            e.getStackTrace();
-            return 0;
         }
 
-        return 1;
+    // Write the words and their counts to the output file
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(ficheiro + ".out"))) {
+            for (Map.Entry<String, Integer> entry : words.entrySet()) {
+                writer.write(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
+
+        }
+        return words;
     }
 
-
 }
+
+
+
 
