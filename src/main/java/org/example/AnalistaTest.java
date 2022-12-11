@@ -34,11 +34,12 @@ class AnalistaTest {
     } teste não funciona porque já é apanhado no codigo, resolvido no codigo ao fazer este retornar nulo com os testes em cima
     */
 
+
     //testes para quantasOcurrencias
     @Test
     void assertArrayTemValorEsperado(){
         char c = 'e';
-        int[] testeArray = {3,3,0,0,0};
+        int[] testeArray = {11,3,3,0,0,0};
         var analista = new Analista("hehe.txt");
         assertArrayEquals(testeArray, analista.quantasOcorrencias(c));
     }
@@ -46,7 +47,7 @@ class AnalistaTest {
     @Test
     void assertArrayTemValorEsperadoEmTodasAsPosicoes(){
         char c = 'e';
-        int[] testeArray = {1,2,3,4,5};
+        int[] testeArray = {0,1,2,3,4,5};
         var analista = new Analista("testearraytodasasposicoes.txt");
         assertArrayEquals(testeArray, analista.quantasOcorrencias(c));
     }
@@ -54,14 +55,14 @@ class AnalistaTest {
     @Test
     void assertArrayNaoTemLetra(){
         char c = 'e';
-        int[] testeArray = {0,0,0,0,0};
+        int[] testeArray = {2,0,0,0,0,0};
         var analista = new Analista("testearraysemletra.txt");
         assertArrayEquals(testeArray, analista.quantasOcorrencias(c));
     }
 
     //testes para ListaPalavras
     @Test
-    void assertWordsStartingWithE() throws IOException {
+    void assertPalavrasQueComecamComE() throws IOException {
         Map<String, Integer> words = new HashMap<>();
         words.put("existe", 2);
         var analista = new Analista("hehe.txt");
@@ -69,27 +70,37 @@ class AnalistaTest {
         assertEquals(words, analista.listaPalavras('e', "testelistapalavras.out") );
 
     }
+    @Test
+    void assertPalavrasQueComecamComLetraQueGuardaNada() throws IOException {
+        Map<String, Integer> words = new HashMap<>();
+        var analista = new Analista("hehe.txt");
 
-    /*
-        Test that the method returns a map containing all words that start with the specified character.
-        Input: c = 'a', ficheiro = "input.txt"
-        Output: words = { "apple": 2, "ant": 1 }
-    Test that the method does not return words that do not start with the specified character.
-        Input: c = 'b', ficheiro = "input.txt"
-        Output: words = { "banana": 1, "blueberry": 2 }
-    Test that the method correctly handles special characters in words.
-        Input: c = '$', ficheiro = "input.txt"
-        Output: words = { "$100": 1, "$$$": 2 }
-    Test that the method correctly handles words with uppercase letters.
-        Input: c = 'C', ficheiro = "input.txt"
-        Output: words = { "Cats": 1, "Carrots": 2 }
-    Test that the method correctly handles words with numbers.
-        Input: c = '1', ficheiro = "input.txt"
-        Output: words = { "123": 1, "1st": 2 }
-    Test that the method correctly handles empty files.
-        Input: c = 'x', ficheiro = "empty.txt"
-        Output: words = { }
-     */
+        assertEquals(words, analista.listaPalavras('u', "testelistapalavras.out") );
 
+    }
+    @Test
+    void assertPalavrasQueComecamComCaracteresEspeciais() throws IOException {
+        Map<String, Integer> words = new HashMap<>();
+        var analista = new Analista("casostestelistapalavras.txt");
+        words.put("$dollar", 2);
+        assertEquals(words, analista.listaPalavras('$', "casostestelistapalavras.txt") );
+
+    }
+
+    @Test
+    void assertPalavrasQueComecamComCaracteresUpperCase() throws IOException {
+        Map<String, Integer> words = new HashMap<>();
+        var analista = new Analista("casostestelistapalavras.txt");
+        words.put("Canario", 1);
+        assertEquals(words, analista.listaPalavras('C', "casostestelistapalavras.txt") );
+    }
+
+    @Test
+    void assertPalavrasQueComecamComNumeros() throws IOException {
+        Map<String, Integer> words = new HashMap<>();
+        var analista = new Analista("casostestelistapalavras.txt");
+        words.put("1233", 3);
+        assertEquals(words, analista.listaPalavras('1', "casostestelistapalavras.txt") );
+    }
 
 }

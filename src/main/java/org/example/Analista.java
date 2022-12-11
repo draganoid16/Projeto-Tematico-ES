@@ -76,21 +76,20 @@ public class Analista {
     }
 
     public Map listaPalavras (char c, String ficheiro) throws IOException {
-        //cria um novo ficheiro
         File myObj = new File(ficheiro + ".out");
 
-        // Create a map to store the words and their counts
+        // Criar mapa
         Map<String, Integer> words = new HashMap<>();
         String[] lineWords = conteudoficheiro.split("\\s+");
 
-        // Loop over the words and add them to the map if they start with the specified character
+        // Loop
         for (String word : lineWords) {
             if (word.startsWith(String.valueOf(c))) {
                 words.put(word, words.getOrDefault(word, 0) + 1);
             }
         }
 
-    // Write the words and their counts to the output file
+    // Escreve no ficheiro o mapa
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(ficheiro + ".out"))) {
             for (Map.Entry<String, Integer> entry : words.entrySet()) {

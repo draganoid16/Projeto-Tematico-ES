@@ -1,0 +1,6 @@
+teste para assertPalavrasQueComecamComCaracteresEspeciais
+$dollar $dollar
+teste para assertPalavrasQueComecamComCaracteresUpperCase
+Canario
+teste para assertPalavrasQueComecamComNumeros
+1233 1233 1233
